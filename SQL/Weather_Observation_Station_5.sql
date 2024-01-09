@@ -18,5 +18,11 @@ When ordered alphabetically, the CITY names are listed as ABC, DEF, PQRS, and WX
 Note
 You can write two separate queries to get the desired output. It need not be a single query.
 */
-SELECT CITY, LENGTH(CITY) FROM STATION ORDER BY LENGTH(CITY) ASC LIMIT 1;
-SELECT CITY, LENGTH(CITY) FROM STATION ORDER BY LENGTH(CITY) DESC LIMIT 1;
+select city, length(city) from station
+where length(city) = (select min(length(city)) from station)
+order by 1 asc limit 1
+;
+select city, length(city) from station
+where length(city) = (select max(length(city)) from station)
+order by 1 asc limit 1
+;
